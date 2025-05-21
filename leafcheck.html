@@ -3,129 +3,263 @@
 <head>
   <meta charset="UTF-8" />
   <title>🌿 LeafCheck.AI</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
   <style>
+    /* Reset & base */
+    * {
+      box-sizing: border-box;
+    }
     body {
       margin: 0;
       font-family: 'Inter', sans-serif;
-      background: #121212;
-      color: #f2f2f2;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: #e0e7ff;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    main {
+      background: rgba(30, 30, 30, 0.9);
+      border-radius: 16px;
+      padding: 2rem 2.5rem;
+      width: 100%;
+      max-width: 600px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.7);
       display: flex;
       flex-direction: column;
-      align-items: center;
-      padding: 2rem;
+      gap: 1.25rem;
+      user-select: none;
     }
     h1 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
+      margin: 0;
+      font-weight: 700;
+      font-size: 2.4rem;
+      text-align: center;
+      color: #7de3a8;
+      text-shadow: 0 0 10px #7de3a8;
     }
-    .card {
-      background: #1e1e1e;
-      padding: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.5);
-      max-width: 600px;
-      width: 100%;
+    label {
+      font-weight: 600;
+      color: #a0d8af;
+      margin-bottom: 0.3rem;
+      user-select: text;
     }
-    input[type="file"], textarea {
+    input[type="file"] {
       width: 100%;
-      margin-bottom: 1rem;
-      padding: 0.75rem;
-      border-radius: 8px;
+      padding: 0.55rem;
+      border-radius: 10px;
       border: none;
-      font-family: inherit;
+      background: #222;
+      color: #ddd;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    input[type="file"]:hover {
+      background: #2e7d32;
+      color: white;
     }
     textarea {
-      resize: vertical;
+      width: 100%;
       min-height: 100px;
+      resize: vertical;
+      border-radius: 10px;
+      border: none;
+      padding: 0.75rem 1rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      background: #222;
+      color: #ddd;
+      box-shadow: inset 0 0 8px rgba(0,0,0,0.8);
+      transition: background 0.3s ease;
+      outline-offset: 2px;
+      outline-color: transparent;
+      outline-style: solid;
+    }
+    textarea:focus {
+      background: #2e7d32;
+      color: white;
+      outline-color: #7de3a8;
+    }
+    #buttons {
+      display: flex;
+      gap: 0.8rem;
+      justify-content: space-between;
     }
     button {
-      background: #00c853;
+      flex: 1;
+      background: #43a047;
       color: white;
+      font-weight: 700;
       border: none;
-      padding: 0.75rem 1.5rem;
-      font-weight: 600;
-      border-radius: 8px;
+      padding: 0.85rem 1.25rem;
+      border-radius: 12px;
       cursor: pointer;
-      width: 100%;
+      font-size: 1.1rem;
+      transition: background 0.25s ease;
+      user-select: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
     }
-    button:hover {
-      background: #00b341;
+    button:hover:not(:disabled) {
+      background: #2e7d32;
     }
-    pre {
+    button:disabled {
+      background: #555;
+      cursor: not-allowed;
+    }
+    #output {
       white-space: pre-wrap;
-      margin-top: 1rem;
-      font-size: 0.95rem;
-      background: #262626;
-      padding: 1rem;
-      border-radius: 8px;
-      overflow-x: auto;
+      background: #1b1b1b;
+      padding: 1rem 1.25rem;
+      border-radius: 14px;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 1rem;
+      min-height: 140px;
+      max-height: 300px;
+      overflow-y: auto;
+      box-shadow: inset 0 0 14px #1b5e20;
+      color: #a0d8af;
+      user-select: text;
+    }
+    /* Icons style */
+    svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+      flex-shrink: 0;
+    }
+    footer {
+      text-align: center;
+      font-size: 0.85rem;
+      color: #7de3a8aa;
+      margin-top: 1.5rem;
+      user-select: none;
     }
   </style>
 </head>
 <body>
-  <h1>🌿 LeafCheck.AI</h1>
-  <div class="card">
-    <input type="file" id="imageInput" accept="image/*">
-    <textarea id="symptomInput" placeholder="Describe the symptoms, location, or changes in the plant... (optional)"></textarea>
-    <button onclick="analyzeImage()">Run Diagnosis</button>
-    <pre id="output">Upload a leaf image + describe symptoms to get started 🌱</pre>
-  </div>
+  <main>
+    <h1>🌿 LeafCheck.AI</h1>
+    
+    <label for="imageInput">Upload Leaf Image</label>
+    <input type="file" id="imageInput" accept="image/*" />
+    
+    <label for="symptomInput">Describe Symptoms (optional)</label>
+    <textarea id="symptomInput" placeholder="Yellow spots? Wilting? Where on the plant?"></textarea>
+    
+    <div id="buttons">
+      <button id="runBtn" onclick="analyzeImage()">Run Diagnosis
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+      </button>
+      <button id="resetBtn" onclick="resetAll()" style="background:#d32f2f;">
+        Reset
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+      <button id="clearFileBtn" onclick="clearFile()" style="background:#f9a825; color:#121212;">
+        Remove Image
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 6L5 18M5 6l14 12"/></svg>
+      </button>
+    </div>
+    
+    <pre id="output">Upload a leaf image and describe symptoms to get started 🌱</pre>
+  </main>
+  
+  <footer>Powered by OpenAI GPT-4o Vision API</footer>
 
   <script>
+    const imageInput = document.getElementById('imageInput');
+    const symptomInput = document.getElementById('symptomInput');
+    const output = document.getElementById('output');
+    const runBtn = document.getElementById('runBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const clearFileBtn = document.getElementById('clearFileBtn');
+
+    function clearFile() {
+      imageInput.value = '';
+      output.textContent = 'Upload a leaf image and describe symptoms to get started 🌱';
+    }
+
+    function resetAll() {
+      imageInput.value = '';
+      symptomInput.value = '';
+      output.textContent = 'Upload a leaf image and describe symptoms to get started 🌱';
+      runBtn.disabled = false;
+    }
+
     async function analyzeImage() {
-      const file = document.getElementById('imageInput').files[0];
-      const symptomText = document.getElementById('symptomInput').value.trim();
-      const output = document.getElementById('output');
+      const file = imageInput.files[0];
+      const symptomText = symptomInput.value.trim();
+
       if (!file) {
         output.textContent = "⚠️ Please upload an image first!";
         return;
       }
 
+      runBtn.disabled = true;
       output.textContent = "🧠 Analyzing image and symptoms... please wait.";
 
       const reader = new FileReader();
       reader.onload = async () => {
-        const base64Image = reader.result.split(',')[1];
+        try {
+          const base64Image = reader.result.split(',')[1];
 
-        const response = await fetch("https://api.openai.com/v1/chat/completions", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer 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`
-          },
-          body: JSON.stringify({
-            model: "gpt-4-vision-preview",
-            messages: [
-              {
-                role: "user",
-                content: [
-                  {
-                    type: "text",
-                    text: `You're a plant pathologist. A user has uploaded a leaf image and optionally described symptoms. Analyze both. If diseased, name the issue, describe the symptoms, and suggest an organic treatment.\n\nUser notes: ${symptomText || "No additional notes."}`
-                  },
-                  {
-                    type: "image_url",
-                    image_url: {
-                      url: `data:image/jpeg;base64,${base64Image}`
+          const response = await fetch("https://api.openai.com/v1/chat/completions", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer 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`
+            },
+            body: JSON.stringify({
+              model: "gpt-4o",
+              messages: [
+                {
+                  role: "user",
+                  content: [
+                    {
+                      type: "text",
+                      text: `You're a plant pathologist. A user has uploaded a leaf image and optionally described symptoms. Analyze both. If diseased, name the issue, describe the symptoms, and suggest an organic treatment.\n\nUser notes: ${symptomText || "No additional notes."}`
+                    },
+                    {
+                      type: "image_url",
+                      image_url: {
+                        url: `data:${file.type};base64,${base64Image}`
+                      }
                     }
-                  }
-                ]
-              }
-            ],
-            max_tokens: 800
-          })
-        });
+                  ]
+                }
+              ],
+              max_tokens: 800
+            })
+          });
 
-        const data = await response.json();
-        if (data.choices?.length) {
-          output.textContent = `✅ Diagnosis:\n\n${data.choices[0].message.content}`;
-        } else {
-          output.textContent = `❌ Error:\n${JSON.stringify(data, null, 2)}`;
+          if (!response.ok) {
+            const err = await response.json();
+            output.textContent = `❌ API Error:\n${err.error?.message || JSON.stringify(err)}`;
+            runBtn.disabled = false;
+            return;
+          }
+
+          const data = await response.json();
+
+          if (data.choices?.length) {
+            output.textContent = `✅ Diagnosis:\n\n${data.choices[0].message.content}`;
+          } else {
+            output.textContent = "⚠️ No diagnosis received. Try again.";
+          }
+        } catch (error) {
+          output.textContent = `❌ Unexpected error:\n${error.message}`;
+        } finally {
+          runBtn.disabled = false;
         }
       };
-
       reader.readAsDataURL(file);
     }
   </script>
