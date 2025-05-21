@@ -5,144 +5,363 @@
   <title>🌿 LeafCheck.AI</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  
   <style>
-    /* Reset & base */
-    * {
-      box-sizing: border-box;
-    }
-    body {
-      margin: 0;
-      font-family: 'Inter', sans-serif;
-      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-      color: #e0e7ff;
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 1rem;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
-    main {
-      background: rgba(30, 30, 30, 0.9);
-      border-radius: 16px;
-      padding: 2rem 2.5rem;
-      width: 100%;
-      max-width: 600px;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.7);
-      display: flex;
-      flex-direction: column;
-      gap: 1.25rem;
-      user-select: none;
-    }
-    h1 {
-      margin: 0;
-      font-weight: 700;
-      font-size: 2.4rem;
-      text-align: center;
-      color: #7de3a8;
-      text-shadow: 0 0 10px #7de3a8;
-    }
-    label {
-      font-weight: 600;
-      color: #a0d8af;
-      margin-bottom: 0.3rem;
-      user-select: text;
-    }
-    input[type="file"] {
-      width: 100%;
-      padding: 0.55rem;
-      border-radius: 10px;
-      border: none;
-      background: #222;
-      color: #ddd;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-    input[type="file"]:hover {
-      background: #2e7d32;
-      color: white;
-    }
-    textarea {
-      width: 100%;
-      min-height: 100px;
-      resize: vertical;
-      border-radius: 10px;
-      border: none;
-      padding: 0.75rem 1rem;
-      font-family: 'Inter', sans-serif;
-      font-size: 1rem;
-      background: #222;
-      color: #ddd;
-      box-shadow: inset 0 0 8px rgba(0,0,0,0.8);
-      transition: background 0.3s ease;
-      outline-offset: 2px;
-      outline-color: transparent;
-      outline-style: solid;
-    }
-    textarea:focus {
-      background: #2e7d32;
-      color: white;
-      outline-color: #7de3a8;
-    }
-    #buttons {
-      display: flex;
-      gap: 0.8rem;
-      justify-content: space-between;
-    }
-    button {
-      flex: 1;
-      background: #43a047;
-      color: white;
-      font-weight: 700;
-      border: none;
-      padding: 0.85rem 1.25rem;
-      border-radius: 12px;
-      cursor: pointer;
-      font-size: 1.1rem;
-      transition: background 0.25s ease;
-      user-select: none;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.6rem;
-    }
-    button:hover:not(:disabled) {
-      background: #2e7d32;
-    }
-    button:disabled {
-      background: #555;
-      cursor: not-allowed;
-    }
-    #output {
-      white-space: pre-wrap;
-      background: #1b1b1b;
-      padding: 1rem 1.25rem;
-      border-radius: 14px;
-      font-family: 'Courier New', Courier, monospace;
-      font-size: 1rem;
-      min-height: 140px;
-      max-height: 300px;
-      overflow-y: auto;
-      box-shadow: inset 0 0 14px #1b5e20;
-      color: #a0d8af;
-      user-select: text;
-    }
-    /* Icons style */
-    svg {
-      width: 20px;
-      height: 20px;
-      fill: currentColor;
-      flex-shrink: 0;
-    }
-    footer {
-      text-align: center;
-      font-size: 0.85rem;
-      color: #7de3a8aa;
-      margin-top: 1.5rem;
-      user-select: none;
-    }
+  /* Enhanced Aesthetic CSS */
+/* Import font */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+/* Reset & base */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  transition: all 0.3s ease;
+}
+
+:root {
+  --primary: #64ffda;
+  --primary-glow: rgba(100, 255, 218, 0.6);
+  --secondary: #a388ee;
+  --accent: #ff7eb3;
+  --dark-bg: #0a192f;
+  --card-bg: rgba(16, 33, 65, 0.7);
+  --text: #e6f1ff;
+  --text-secondary: #8892b0;
+  --success: #42d392;
+  --border-radius: 16px;
+}
+
+body {
+  margin: 0;
+  font-family: 'Outfit', sans-serif;
+  background: linear-gradient(125deg, #0a192f, #172a45, #303C55);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+@keyframes gradientBG {
+  0% { background-position: 0% 50% }
+  50% { background-position: 100% 50% }
+  100% { background-position: 0% 50% }
+}
+
+main {
+  background: var(--card-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: var(--border-radius);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 650px;
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.5),
+    0 1px 2px rgba(100, 255, 218, 0.1),
+    0 0 60px rgba(100, 255, 218, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  user-select: none;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+main::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(100, 255, 218, 0.03) 0%, transparent 70%);
+  z-index: -1;
+  animation: rotateGradient 30s linear infinite;
+}
+
+@keyframes rotateGradient {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+h1 {
+  margin: 0;
+  font-weight: 700;
+  font-size: 2.6rem;
+  text-align: center;
+  color: var(--primary);
+  letter-spacing: -0.5px;
+  text-shadow: 
+    0 0 10px var(--primary-glow),
+    0 0 30px rgba(100, 255, 218, 0.3);
+  position: relative;
+  display: inline-block;
+  margin: 0 auto;
+}
+
+h1::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--primary), transparent);
+  border-radius: 10px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+label {
+  font-weight: 500;
+  color: var(--primary);
+  margin-bottom: 0.3rem;
+  user-select: text;
+  font-size: 1.05rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+input[type="file"] {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+input[type="file"]:hover {
+  background: rgba(100, 255, 218, 0.1);
+  border-color: rgba(100, 255, 218, 0.3);
+  box-shadow: 0 0 15px rgba(100, 255, 218, 0.2);
+}
+
+textarea {
+  width: 100%;
+  min-height: 120px;
+  resize: vertical;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1rem 1.25rem;
+  font-family: 'Outfit', sans-serif;
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text);
+  box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+textarea:focus {
+  background: rgba(100, 255, 218, 0.05);
+  border-color: var(--primary);
+  box-shadow: 
+    inset 0 2px 10px rgba(0, 0, 0, 0.3),
+    0 0 0 2px rgba(100, 255, 218, 0.2);
+}
+
+#buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+}
+
+button {
+  flex: 1;
+  background: linear-gradient(135deg, var(--primary), #36c4b0);
+  color: #0a192f;
+  font-weight: 600;
+  border: none;
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(100, 255, 218, 0.3);
+}
+
+button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 7px 25px rgba(100, 255, 218, 0.4);
+}
+
+button:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: 0.5s;
+}
+
+button:hover::before {
+  left: 100%;
+}
+
+button:disabled {
+  background: linear-gradient(135deg, #566380, #445070);
+  cursor: not-allowed;
+  box-shadow: none;
+  color: rgba(230, 241, 255, 0.5);
+}
+
+#output {
+  white-space: pre-wrap;
+  background: rgba(10, 25, 47, 0.7);
+  padding: 1.25rem 1.5rem;
+  border-radius: 14px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.95rem;
+  min-height: 160px;
+  max-height: 320px;
+  overflow-y: auto;
+  box-shadow: 
+    inset 0 0 20px rgba(0, 0, 0, 0.3),
+    0 0 30px rgba(100, 255, 218, 0.1);
+  color: var(--primary);
+  user-select: text;
+  border: 1px solid rgba(100, 255, 218, 0.1);
+  transition: all 0.3s ease;
+  position: relative;
+  line-height: 1.6;
+}
+
+#output::-webkit-scrollbar {
+  width: 8px;
+}
+
+#output::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+}
+
+#output::-webkit-scrollbar-thumb {
+  background: rgba(100, 255, 218, 0.3);
+  border-radius: 10px;
+}
+
+#output::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 255, 218, 0.5);
+}
+
+/* Icons style */
+svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+  flex-shrink: 0;
+}
+
+.icon-pulse {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+footer {
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-top: 1.75rem;
+  user-select: none;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  position: relative;
+  padding: 0.5rem;
+}
+
+footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(100, 255, 218, 0.3), transparent);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  body {
+    padding: 1rem;
+  }
+  
+  main {
+    padding: 2rem 1.5rem;
+  }
+  
+  h1 {
+    font-size: 2.2rem;
+  }
+  
+  #buttons {
+    flex-direction: column;
+  }
+}
+
+/* Focus styling for accessibility */
+button:focus, input:focus, textarea:focus {
+  outline: none;
+  box-shadow: 
+    0 0 0 2px var(--dark-bg),
+    0 0 0 4px rgba(100, 255, 218, 0.5);
+}
+
+/* Adding subtle animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+main > * {
+  animation: fadeIn 0.5s ease forwards;
+}
+
+main > *:nth-child(1) { animation-delay: 0.1s; }
+main > *:nth-child(2) { animation-delay: 0.2s; }
+main > *:nth-child(3) { animation-delay: 0.3s; }
+main > *:nth-child(4) { animation-delay: 0.4s; }
+main > *:nth-child(5) { animation-delay: 0.5s; }
   </style>
 </head>
 <body>
@@ -172,8 +391,6 @@
     <pre id="output">Upload a leaf image and describe symptoms to get started 🌱</pre>
   </main>
   
-  <footer>Powered by OpenAI GPT-4o Vision API</footer>
-
   <script>
     const imageInput = document.getElementById('imageInput');
     const symptomInput = document.getElementById('symptomInput');
