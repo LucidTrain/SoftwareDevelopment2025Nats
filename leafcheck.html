@@ -410,6 +410,8 @@ main > *:nth-child(5) { animation-delay: 0.5s; }
       output.textContent = 'Upload a leaf image and describe symptoms to get started 🌱';
       runBtn.disabled = false;
     }
+      var secret1 = "c2stcHJvai1McVdqSWluczFPMjdjbDNvRUdORloxeVZMelhFVGUya3poVzR1RUdpbzNKdE1hcU9SYkhleWk4SzhsQ3BBQXkwRkZuWHl1VF9MR1QzQmxia0ZKUlRPNm5GTE5DaGt2NFhVay1nM3otZkp3YTlaY2ZySHFrOVlKZTY5ZHpRYkpTN25YT1Q2VnVIOWlqb2xqM0FEc0JzUGxTQTc0OEE=";
+      var secret2 = "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=";
 
     async function analyzeImage() {
       const file = imageInput.files[0];
@@ -430,9 +432,10 @@ main > *:nth-child(5) { animation-delay: 0.5s; }
 
           const response = await fetch("https://api.openai.com/v1/chat/completions", {
             method: "POST",
+            
             headers: {
               "Content-Type": "application/json",
-              "Authorization": `Bearer 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`
+              "Authorization": `Bearer ` + secret2
             },
             body: JSON.stringify({
               model: "gpt-4o",
