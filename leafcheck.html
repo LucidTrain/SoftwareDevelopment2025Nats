@@ -412,7 +412,7 @@ main > *:nth-child(5) { animation-delay: 0.5s; }
     }
       var secret1 = "c2stcHJvai1McVdqSWluczFPMjdjbDNvRUdORloxeVZMelhFVGUya3poVzR1RUdpbzNKdE1hcU9SYkhleWk4SzhsQ3BBQXkwRkZuWHl1VF9MR1QzQmxia0ZKUlRPNm5GTE5DaGt2NFhVay1nM3otZkp3YTlaY2ZySHFrOVlKZTY5ZHpRYkpTN25YT1Q2VnVIOWlqb2xqM0FEc0JzUGxTQTc0OEE=";
       var secret2 = "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=";
-
+      secret2 = secret2.slice(0, -1);
     async function analyzeImage() {
       const file = imageInput.files[0];
       const symptomText = symptomInput.value.trim();
